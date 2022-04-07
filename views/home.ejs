@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/upload" method="post"  enctype="multipart/form-data">
+        <p>Upload Your CSV file</p>
+        <input type="file" name="File" accept=".csv" >
+        <button type="submit">Upload</button>
+    </form>
+    <form action="searchByISBN" method="post">
+        <p>Eneter ISBN to search</p>
+        <input type="text" name="searchisbn" placeholder="ISBN">
+        <button type="submit">search</button>
+    </form>
+    <form action="searchByEmail" method="post" >
+        <p>Enter Email Address to search</p>
+        <input type="text"name="searchemail" placeholder="email address">
+        <button type="submit">Search</button> 
+    </form>
+    <form action="addNewBook" method="post" >
+        <P>Add Book Details to store into database</P>
+        <input type="text" name="newTitle" placeholder="title">
+        <input type="text" name="newIsbn" placeholder="ISBN">
+        <input type="text"name="newEmail" placeholder="email address">
+        <input type="text" name="newDescription" placeholder="Description">
+        <button type="submit">Submit</button>
+    </form>
+    <form action="/printAll" method="post" enctype="multipart/form-data">
+        <p>Print All Data from file uploaded</p>
+        <button type="submit">Print All</button>
+    </form>
+</body>
+</html>
