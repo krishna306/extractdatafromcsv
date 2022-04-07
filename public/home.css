@@ -1,0 +1,30 @@
+body{
+    background-color: rgb(211, 238, 238);
+}
+
+button{
+    background-color: #04AA6D;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+input {
+    padding: 8px 16px;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .btn {
+    color: white;
+    background-color: #04AA6D;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
