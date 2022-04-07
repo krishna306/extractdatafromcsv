@@ -86,13 +86,8 @@ app.post("/addNewBook",function(req,res){
     fs.appendFile(filePath, newEntry,function(err) {
         if (err) throw err;
     });
-    var file_descriptor = fs.openSync(filePath);
-    fs.close(file_descriptor, (err) => {
-        if (err)
-          console.error('Failed to close file', err);
-    });
     var updated = CSVTOJSON(filePath);
-    res.render("home");
+    res.render("result",{result:updated , Keys : KEYS});
 });
 app.post("/printAll",function(req,res){
     res.render("result",{result:JSON , Keys : KEYS});
