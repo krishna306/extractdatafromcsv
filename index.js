@@ -9,6 +9,7 @@ const multer = require("multer");
 const CSVToJSON = require("csvtojson");
 
 const { resourceLimits } = require("worker_threads");
+const { Console } = require("console");
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -30,12 +31,6 @@ const upload = multer({storage:fileStorageEngine})
 let currentFile = "";
 var JSON = [];
 var KEYS = [];
-app.post("/upload",upload.single("File"),(req,res)=>{
-    currentFile = req.file.filename;
-    JSON = CSVTOJSON(""+"data/"+currentFile);
-    KEYS = Object.keys(JSON[0]);
-    res.redirect("/");
-});
 
 function CSVTOJSON(PATH){
     const csv = fs.readFileSync(PATH);
@@ -52,6 +47,13 @@ function CSVTOJSON(PATH){
     }
     return result;
 }
+
+app.post("/upload",upload.single("File"),(req,res)=>{
+    currentFile = req.file.filename;
+    JSON = CSVTOJSON(""+"data/"+currentFile);
+    KEYS = Object.keys(JSON[0]);
+    res.redirect("/");
+});
 
 app.post("/searchByISBN",function(req,res){
     var searchisbn = req.body.searchisbn;
@@ -84,14 +86,17 @@ app.post("/addNewBook",function(req,res){
     fs.appendFile(filePath, newEntry,function(err) {
         if (err) throw err;
     });
+    var file_descriptor = fs.openSync(filePath);
+    fs.close(file_descriptor, (err) => {
+        if (err)
+          console.error('Failed to close file', err);
+    });
+    var updated = CSVTOJSON(filePath);
     res.render("home");
 });
 app.post("/printAll",function(req,res){
     res.render("result",{result:JSON , Keys : KEYS});
 });
-
-
-
 
 const port =  process.env.PORT || 5000;
 
@@ -99,6 +104,7 @@ app.get("/",function(req,res){
     res.render("home");
 });
 app.listen(port,function(){
-    console.log("Server on 5000");
+
+    console.log('Server running on 5000');
 });
 
