@@ -93,12 +93,12 @@ app.post("/printAll",function(req,res){
 
 
 
-const port =  process.env.port || 3000;
+const port =  process.env.port || 5000;
 
 app.get("/",function(req,res){
     res.render("home");
 });
 app.listen(port,function(){
-    console.log("Server on 3000");
+    console.log("Server on 5000");
 });
 
